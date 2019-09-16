@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+<mapper namespace="com.example.springboot.mapper.BoardMapper">
+ 
+	<insert id="boardInsert" parameterType="com.example.springboot.domain.BoardVO">
+		insert into springboot_board_pro
+			values
+		(#{bno},#{subject},#{content},#{writer},now(),0)
+	</insert>
+	
+	<select id="boardList" resultType="com.example.springboot.domain.BoardVO">
+		select * from springboot_board_pro
+	</select>
+	
+	<select id="boardView" parameterType="int" resultType="com.example.springboot.domain.BoardVO">
+		select * from springboot_board_pro where bno = #{bno}
+	</select>
+	
+	<update id="hitPlus" parameterType="int">
+		update springboot_board_pro set hit = hit+1 where bno = #{bno}
+	</update>
+	
+	<update id="boardUpdate" parameterType="com.example.springboot.domain.BoardVO">
+		update springboot_board_pro set subject = #{subject}, content = #{content} where bno = #{bno}
+	</update>
+	
+	<delete id="boardDelete" parameterType="int">
+		delete from springboot_board_pro where bno = #{bno}
+	</delete>
+</mapper>
